@@ -47,6 +47,7 @@ kotlin {
             implementation(libs.koin.android)
             implementation(libs.koin.androidx.compose)
             implementation(libs.ktor.client.okhttp)
+            implementation("com.lordcodes.turtle:turtle:0.5.0")
         }
         commonMain.dependencies {
             implementation(compose.runtime)
