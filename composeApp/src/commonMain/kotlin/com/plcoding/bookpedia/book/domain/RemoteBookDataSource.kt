@@ -1,4 +1,4 @@
-package com.plcoding.bookpedia.book.data.network
+package com.plcoding.bookpedia.book.domain
 
 import com.plcoding.bookpedia.book.data.dto.SearchResponseDto
 import com.plcoding.bookpedia.core.domain.DataError
