@@ -1,13 +1,9 @@
 package com.plcoding.bookpedia
 
-import android.content.Context
-import android.net.wifi.WifiManager
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.runtime.remember
-import io.ktor.client.engine.okhttp.OkHttp
+import com.plcoding.bookpedia.app.App
 
 
 class MainActivity : ComponentActivity() {
