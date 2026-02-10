@@ -38,7 +38,6 @@ fun App() {
                 composable<Route.BookList>{
                     val selectedVm = it.sharedKoinViewModel<SelectedBookViewModel>(navController)
                     LaunchedEffect(true) {
-                        println("IN LAUNCHED EFFECT")
                         selectedVm.onSelectBook(null)
                     }
                     BookListScreenRoot(
