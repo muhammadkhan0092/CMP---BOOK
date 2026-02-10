@@ -4,6 +4,7 @@ import com.plcoding.bookpedia.book.data.network.KtorRemoteBookDataSource
 import com.plcoding.bookpedia.book.data.repository.DefaultBookRepository
 import com.plcoding.bookpedia.book.domain.BookRepository
 import com.plcoding.bookpedia.book.domain.RemoteBookDataSource
+import com.plcoding.bookpedia.book.presentation.book_detail.BookDetailViewModel
 import com.plcoding.bookpedia.book.presentation.book_list.BookListVm
 import com.plcoding.bookpedia.book.presentation.book_list.SelectedBookViewModel
 import com.plcoding.bookpedia.core.data.HttpClientFactory
@@ -24,4 +25,5 @@ val sharedModule = module {
 
     viewModelOf(::BookListVm)
     viewModelOf(::SelectedBookViewModel)
+    viewModelOf(::BookDetailViewModel)
 }
