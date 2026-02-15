@@ -1,7 +1,9 @@
 package com.plcoding.bookpedia.book.presentation.book_detail.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -24,7 +26,7 @@ fun BookChip(
     size : ChipSize = ChipSize.REGULAR,
     chipContent : @Composable ()->Unit
 ){
-    Box(
+    Row (
         modifier =modifier.widthIn(
             min = when(size){
                 SMALL -> 50.dp
@@ -37,7 +39,8 @@ fun BookChip(
                 vertical = 8.dp,
                 horizontal = 12.dp
             ),
-        contentAlignment = Alignment.Center
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
     ){
         chipContent()
     }
