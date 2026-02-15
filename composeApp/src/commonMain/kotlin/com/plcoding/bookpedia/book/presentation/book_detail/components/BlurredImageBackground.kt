@@ -122,7 +122,7 @@ fun BlurredImageBackground(
                                 CircularProgressIndicator()
                             }
                         }
-                        result.isSuccess -> {
+                        else -> {
                             println("IN IF ELSE -> ELSE")
                             Box() {
                                 Image(

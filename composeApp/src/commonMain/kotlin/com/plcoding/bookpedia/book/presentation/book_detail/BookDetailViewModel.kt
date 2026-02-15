@@ -4,10 +4,12 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
+import coil3.util.Logger
 import com.plcoding.bookpedia.app.Route
 import com.plcoding.bookpedia.book.domain.BookRepository
 import com.plcoding.bookpedia.book.presentation.book_detail.models.BookDetailAction
 import com.plcoding.bookpedia.book.presentation.book_detail.models.BookDetailState
+import com.plcoding.bookpedia.core.domain.Result
 import com.plcoding.bookpedia.core.domain.onError
 import com.plcoding.bookpedia.core.domain.onSuccess
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -31,12 +33,35 @@ class BookDetailViewModel (
             SharingStarted.WhileSubscribed(5000L),
             _state.value
         )
-
     private val bookId = savedStateHandle.toRoute<Route.BookDetail>().id
     fun onAction(action : BookDetailAction){
         when(action){
             BookDetailAction.OnBackClick -> {}
-            BookDetailAction.OnFavClick -> {}
+            BookDetailAction.OnFavClick -> {
+                val book = _state.value.book?:return
+                val isFav = _state.value.isFav
+                viewModelScope.launch {
+                    val isSuccess = if(isFav){
+                        bookRepository.deleteFromFav(bookId)
+                        true
+                    }
+                    else{
+                        val result = bookRepository.markAsFav(book)
+                        when(result){
+                            is Result.Error<*> -> false
+                            is Result.Success<*> -> true
+                        }
+                    }
+                    if(isSuccess){
+                        _state.update {
+                            it.copy(isFav = !isFav)
+                        }
+                    }
+                    else{
+                        println("Error in book")
+                    }
+                }
+            }
             is BookDetailAction.OnSelectedBookChange -> {
                 _state.update {
                     it.copy(book = action.book)

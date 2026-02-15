@@ -96,5 +96,19 @@ class BookListVm(
         }
     }
 
+    init {
+        observeFavBooks()
+    }
+
+    private fun observeFavBooks() {
+        viewModelScope.launch {
+            bookRepository.getFavBooks().collectLatest {books->
+                println("FAV BOOKS ARE $books")
+                _state.update {
+                    it.copy(favoriteBooks = books)
+                }
+            }
+        }
+    }
 
 }

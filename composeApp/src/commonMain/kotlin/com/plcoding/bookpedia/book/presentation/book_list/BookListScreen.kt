@@ -65,7 +65,7 @@ fun BookListScreenRoot(
     )
 }
 @Composable
-private fun BookListScreen(
+fun BookListScreen(
     state : BookListState,
     onAction : (BookListAction)-> Unit
 ){
@@ -183,7 +183,7 @@ private fun BookListScreen(
                                 if (state.favoriteBooks.isEmpty()) ErrorText(stringResource(Res.string.no_favorite_books))
                                 else{
                                     BookList(
-                                        books = state.searchResults,
+                                        books = state.favoriteBooks,
                                         onBookClicked = {
                                             onAction(BookListAction.OnBookClick(it))
                                         },
