@@ -1,5 +1,7 @@
 package com.plcoding.bookpedia.app
 
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -32,7 +34,10 @@ fun App() {
             startDestination = Route.BookGraph
         ){
             navigation<Route.BookGraph>(startDestination = Route.BookList){
-                composable<Route.BookList>{
+                composable<Route.BookList>(
+                    exitTransition = { slideOutHorizontally() },
+                    popEnterTransition = { slideInHorizontally() }
+                ){
                     val selectedVm = it.sharedKoinViewModel<SelectedBookViewModel>(navController)
                     LaunchedEffect(true) {
                         selectedVm.onSelectBook(null)
@@ -45,7 +50,14 @@ fun App() {
                         }
                     )
                 }
-                composable<Route.BookDetail>{
+                composable<Route.BookDetail>(
+                    enterTransition = {slideInHorizontally{offset->
+                        offset
+                    }},
+                    exitTransition = {slideOutHorizontally{offset->
+                        offset
+                    }}
+                ){
                     val selectedVm = it.sharedKoinViewModel<SelectedBookViewModel>(navController)
                     val bookDetailVm = koinViewModel<BookDetailViewModel>()
                     val selectedBook by selectedVm.selectedBook.collectAsStateWithLifecycle()

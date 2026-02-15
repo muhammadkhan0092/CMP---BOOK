@@ -46,6 +46,7 @@ import cmp_bookpedia.composeapp.generated.resources.remove_from_favorites
 import coil3.compose.rememberAsyncImagePainter
 import com.plcoding.bookpedia.core.presentation.DarkBlue
 import com.plcoding.bookpedia.core.presentation.DesertWhite
+import com.plcoding.bookpedia.core.presentation.PulseAnimation
 import com.plcoding.bookpedia.core.presentation.SandYellow
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.resources.stringResource
@@ -114,16 +115,14 @@ fun BlurredImageBackground(
                 ) { result ->
                     when {
                         result == null -> {
-                            println("IN IF ELSE -> NULL")
                             Box(
                                 modifier = Modifier.fillMaxSize(),
                                 contentAlignment = Alignment.Center
                             ) {
-                                CircularProgressIndicator()
+                                PulseAnimation()
                             }
                         }
                         else -> {
-                            println("IN IF ELSE -> ELSE")
                             Box() {
                                 Image(
                                     painter = if (result.isSuccess) painter else painterResource(Res.drawable.book_error_2),
