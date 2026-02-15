@@ -1,5 +1,8 @@
 package com.plcoding.bookpedia.book.data.dto
 
-data class BookWorkDto(
+import kotlinx.serialization.Serializable
 
+@Serializable(with = BookWorkDtoSerializer::class)
+data class BookWorkDto(
+    val description : String? = null
 )
